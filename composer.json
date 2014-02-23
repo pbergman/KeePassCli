@@ -1,0 +1,25 @@
+{
+    "require": {
+        "pbergman/sharedmemory":       "dev-master",
+        "pbergman/keepass":            "dev-master",
+        "symfony/console":             "2.4.*@stable",
+        "symfony/event-dispatcher":    "2.4.*@stable"
+
+    },
+    "autoload": {
+        "psr-0": {
+            "":             "vendor/",
+            "KeePassCli":   "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:pbergman/SHMController.git"
+        },
+	{
+            "type": "vcs",
+            "url": "git@github.com:pbergman/KeePass.git"
+        }
+    ]
+}
