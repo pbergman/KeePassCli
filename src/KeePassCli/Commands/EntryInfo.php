@@ -67,21 +67,22 @@ class EntryInfo extends Command implements ApplicationInterface
 
             foreach ( $properties as $property ){
 
+                $propertyValue = call_user_func(array($result, $this->getMethodName($property->name)));
+
                 switch( $property->name ){
                     case 'data':
-                        array_walk(call_user_func(array($result, $this->getMethodName($property->name))), function($val, $key) use (&$rows){
+                        array_walk($propertyValue, function($val, $key) use (&$rows){
                             $rows[] = array($key, $val);
                         });
 
                         break;
                     case 'last_modified':
                     case 'created':
-                        /** @var \DateTime $time */
-                        $time   = call_user_func(array($result, $this->getMethodName($property->name)));
-                        $rows[] = array($property->name, $time->format('Y-m-d H:i:s'));
+                        /** @var \DateTime $propertyValue */
+                        $rows[] = array($property->name, $propertyValue->format('Y-m-d H:i:s'));
                         break;
                     default:
-                        $rows[] = array($property->name, (string) call_user_func(array($result, $this->getMethodName($property->name))));
+                        $rows[] = array($property->name, $propertyValue);
                 }
 
             }
