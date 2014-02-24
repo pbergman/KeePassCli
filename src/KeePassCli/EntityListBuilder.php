@@ -6,7 +6,7 @@
 
 namespace KeePassCli;
 
-use KeePass\Entity\BaseEntity;
+use \KeePass\Entity\BaseEntity;
 use \KeePass\EntityController\Controller as EntityController;
 use \KeePass\EntityController\Filters\Filter as ecFilter;
 
@@ -14,16 +14,16 @@ use \KeePass\Exceptions\EntityUnknownPropertyException;
 use \KeePass\Exceptions\OptionNotAllowedException;
 
 /**
- * Class AutoCompleteIndex
+ * Class ACListBuilder
  *
- * This a helper to create index for auto complete functions
+ * This a helper to create index list for auto complete functions
  *
  * use method build to define which property or properties
  * (use a array of names as argument) needed in the index
  *
  * @package KeePassCli
  */
-class AutoCompleteIndex
+class ACListBuilder
 {
     /** @var array  */
     protected $index = array();
