@@ -8,13 +8,14 @@ namespace KeePassCli;
 
 use \KeePass\Entity\BaseEntity;
 use \KeePass\EntityController\Controller as EntityController;
+use \SharedMemory\Controller as SHMController;
 use \KeePass\EntityController\Filters\Filter as ecFilter;
 
 use \KeePass\Exceptions\EntityUnknownPropertyException;
 use \KeePass\Exceptions\OptionNotAllowedException;
 
 /**
- * Class ACListBuilder
+ * Class EntityListBuilder
  *
  * This a helper to create index list for auto complete functions
  *
@@ -23,7 +24,7 @@ use \KeePass\Exceptions\OptionNotAllowedException;
  *
  * @package KeePassCli
  */
-class ACListBuilder
+class EntityListBuilder
 {
     /** @var array  */
     protected $index = array();
@@ -33,17 +34,21 @@ class ACListBuilder
     protected $ec;
     /** @var  ecFilter  */
     protected $entities = array();
+    /** @var  SHMController  */
+    protected $shm;
 
     /**
      * @param EntityController $ec
+     * @param SHMController    $shm
      * @param string           $type    type which the index has te build
      *
      * @throws OptionNotAllowedException
      */
-    public function __construct(EntityController $ec, $type)
+    public function __construct(EntityController $ec, SHMController $shm, $type)
     {
 
-        $this->ec = $ec;
+        $this->ec  = $ec;
+        $this->shm = $shm;
 
         if (!in_array($type, $this->availableTypes)) {
 
@@ -117,7 +122,7 @@ class ACListBuilder
         array_walk($this->index, function($val, $key) use ($indexName, &$return){
 
             if (in_array($indexName, $val)) {
-                $return =  current($this->entities->where('uuid', $key)->getResult());
+                $return[] =  $this->entities->where('uuid', $key)->getSingleResult();
             }
 
         });

@@ -44,7 +44,7 @@ class Application extends BaseApplication
     {
         if (true === $input->hasParameterOption(array('--reset-pwd', '-R'))) {
             $shm = new \SharedMemory\Controller();
-            $shm->varDel('kpdbpw');
+            $shm->varDel('71528FF615139991960748DC');
             return 0;
         }
 

@@ -6,7 +6,7 @@
 
 namespace KeePassCli\EventListeners;
 
-interface CommandListenerInterface
+interface PreCommandListenerInterface
 {
     public function listenerAction(\Symfony\Component\Console\Event\ConsoleCommandEvent $event);
 }
