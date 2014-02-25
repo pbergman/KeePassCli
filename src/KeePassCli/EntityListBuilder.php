@@ -8,7 +8,6 @@ namespace KeePassCli;
 
 use \KeePass\Entity\BaseEntity;
 use \KeePass\EntityController\Controller as EntityController;
-use \SharedMemory\Controller as SHMController;
 use \KeePass\EntityController\Filters\Filter as ecFilter;
 
 use \KeePass\Exceptions\EntityUnknownPropertyException;
@@ -34,21 +33,18 @@ class EntityListBuilder
     protected $ec;
     /** @var  ecFilter  */
     protected $entities = array();
-    /** @var  SHMController  */
-    protected $shm;
+
 
     /**
      * @param EntityController $ec
-     * @param SHMController    $shm
      * @param string           $type    type which the index has te build
      *
      * @throws OptionNotAllowedException
      */
-    public function __construct(EntityController $ec, SHMController $shm, $type)
+    public function __construct(EntityController $ec, $type)
     {
 
         $this->ec  = $ec;
-        $this->shm = $shm;
 
         if (!in_array($type, $this->availableTypes)) {
 
@@ -122,7 +118,7 @@ class EntityListBuilder
         array_walk($this->index, function($val, $key) use ($indexName, &$return){
 
             if (in_array($indexName, $val)) {
-                $return[] =  $this->entities->where('uuid', $key)->getSingleResult();
+                $return[] =  $key;
             }
 
         });
