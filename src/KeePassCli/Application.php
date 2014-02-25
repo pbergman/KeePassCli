@@ -24,6 +24,9 @@ class Application extends BaseApplication
         /** auto load commands */
         $this->loadCommands();
 
+        /** add array helper */
+        $this->getHelperSet()->set(new \KeePassCli\Helper\EntityTableHelper());
+
     }
 
     protected function getDefaultInputDefinition()
