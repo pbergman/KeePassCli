@@ -44,12 +44,12 @@ class GroupInfo extends Command implements ApplicationInterface
         $ec             = $this->application->get('keepass')->getEntityController();
         $ac             = new EntityListBuilder($ec, 'group');
         $index          = $ac->build(array('name','namespace'));
-        $name           = $dialog->ask($output, 'Server: ', null, $index);
+        $name           = $dialog->ask($output, 'Group: ', null, $index);
         $results        = $ac->getResultByIndex($name);
 
         $entityTable->setHeaders(array('Name','Value'));
 
-        foreach ( $results as $result ){
+        foreach ($results as $result){
 
             if ( false !== $entry = $ec->getEntities('group')->where('uuid', $result)->getSingleResult()) {
                 if ($entry) {

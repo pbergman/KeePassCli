@@ -44,13 +44,13 @@ class GroupGetEntries extends Command implements ApplicationInterface
         $ec             = $this->application->get('keepass')->getEntityController();
         $ac             = new EntityListBuilder($ec, 'group');
         $index          = $ac->build(array('name','namespace'));
-        $name           = $dialog->ask($output, 'Server: ', null, $index);
+        $name           = $dialog->ask($output, 'Group: ', null, $index);
         $results        = $ac->getResultByIndex($name);
 
         $entityTable->setHeaders(array('Name','Value'));
 
-        foreach ( $results as $result ){
-            if ( false !== $entries = $ec->getEntities('group')->where('uuid', $result)->getEntries()->getResult()) {
+        foreach ($results as $result){
+            if (false !== $entries = $ec->getEntities('group')->where('uuid', $result)->getEntries()->getResult()) {
                 foreach ($entries as $entry) {
                     if ($entry) {
                         $entityTable->addEntity($entry);

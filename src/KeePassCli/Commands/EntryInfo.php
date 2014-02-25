@@ -7,9 +7,9 @@
 namespace KeePassCli\Commands;
 
 use \KeePassCli\EntityListBuilder;
+use \KeePassCli\Helper\EntityTableHelper;
 use \Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\DialogHelper;
-use Symfony\Component\Console\Helper\TableHelper;
+use \Symfony\Component\Console\Helper\DialogHelper;
 use \Symfony\Component\Console\Input\InputArgument;
 use \Symfony\Component\Console\Input\InputInterface;
 use \Symfony\Component\Console\Output\OutputInterface;
@@ -43,60 +43,26 @@ class EntryInfo extends Command implements ApplicationInterface
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $ac = new EntityListBuilder(
-            $this->application->get('keepass')->getEntityController(),
-            $this->application->get('shm'),
-            'entry'
-        );
-
-        $index   = $ac->build(array('name','namespace'));
         /** @var DialogHelper  $dialog */
-        $dialog  = $this->getHelperSet()->get('dialog');
-        $name    = $dialog->ask($output, 'Server: ', null, $index);
-        $results = $ac->getResultByIndex($name);
-        /** @var TableHelper $table */
-        $table   = $this->getHelperSet()->get('table');
+        $dialog         = $this->getHelperSet()->get('dialog');
+        /** @var EntityTableHelper $entityTable */
+        $entityTable    = $this->getHelperSet()->get('entity_table');
+        /** @var \KeePass\EntityController\Controller $ec */
+        $ec             = $this->application->get('keepass')->getEntityController();
+        $ac             = new EntityListBuilder($ec, 'entry');
+        $index          = $ac->build(array('name','namespace'));
+        $name           = $dialog->ask($output, 'Server: ', null, $index);
+        $results        = $ac->getResultByIndex($name);
 
-        $table->setHeaders(array('Name','Value'));
+
+        $entityTable->setHeaders(array('Name','Value'));
 
         foreach ($results as $result) {
-
-            $ref        = new \ReflectionClass($result);
-            $properties = array_merge($ref->getParentClass()->getProperties(), $ref->getProperties());
-            $rows       = array();
-
-            foreach ( $properties as $property ){
-
-                $propertyValue = call_user_func(array($result, $this->getMethodName($property->name)));
-
-                switch( $property->name ){
-                    case 'data':
-                        array_walk($propertyValue, function($val, $key) use (&$rows){
-                            $rows[] = array($key, $val);
-                        });
-
-                        break;
-                    case 'last_modified':
-                    case 'created':
-                        /** @var \DateTime $propertyValue */
-                        $rows[] = array($property->name, $propertyValue->format('Y-m-d H:i:s'));
-                        break;
-                    default:
-                        $rows[] = array($property->name, $propertyValue);
-                }
-
+            if (false !== $entries = $ec->getEntities('entry')->where('uuid', $result)->getSingleResult()) {
+                $entityTable->addEntity($entries);
+                $entityTable->render($output);
             }
-
-            $table->setRows($rows);
-            $table->render($output);
-
         }
-
-    }
-
-    protected function getMethodName($name)
-    {
-        return sprintf('get%s', implode('', array_map('ucfirst', explode('_', $name))));
 
     }
 
