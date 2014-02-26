@@ -55,7 +55,10 @@ class Application extends BaseApplication
     }
 
     /**
-     * reads commands folder and check if it is a instance from Symfony command,
+     * Reads commands folder and check if it is a instance from Symfony command,
+     *
+     * And if is instance from ValidateInterface than check is static function
+     * returns true, so we can check for example package are installed
      *
      * @throws \Exception
      */
@@ -68,22 +71,29 @@ class Application extends BaseApplication
 
             foreach (glob(sprintf("%s/*.php",$commandFolder)) as $filename) {
 
-                $fileInfo     = pathinfo($filename);
-                $className    = sprintf('KeePassCli\Commands\%s', $fileInfo['filename']);
-                $baseCommand  = '\Symfony\Component\Console\Command\Command';
+                $fileInfo           = pathinfo($filename);
+                $className          = sprintf('KeePassCli\Commands\%s', $fileInfo['filename']);
+                $baseCommand        = '\Symfony\Component\Console\Command\Command';
+                $validateInterface  = 'KeePassCli\Commands\ValidateInterface';
 
                 if(class_exists($className)){
 
                     $classRef = new \ReflectionClass($className);
 
-                    if($classRef->isSubclassOf($baseCommand)){
+                    if ($classRef->isSubclassOf($baseCommand)) {
 
-                        $this->add(new $className);
+                        $addClass = true;
 
+                        if ($classRef->isSubclassOf($validateInterface)) {
+                            /** @var $className \KeePassCli\Commands\ValidateInterface  */
+                            $addClass = $className::validate();
+                        }
+
+                        if ( $addClass === true ) {
+                            $this->add(new $className);
+                        }
                     }
-
                 }
-
             }
 
         }else{
