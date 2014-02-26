@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pbergman/KeePass.git",
-                "reference": "3dd5dcbc49b897bd4066bf5309eeca8f2d4f565d"
+                "reference": "a59aa7f5f2fd79352f40ed8bc5da0d6bc679c271"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pbergman/KeePass/zipball/3dd5dcbc49b897bd4066bf5309eeca8f2d4f565d",
-                "reference": "3dd5dcbc49b897bd4066bf5309eeca8f2d4f565d",
+                "url": "https://api.github.com/repos/pbergman/KeePass/zipball/a59aa7f5f2fd79352f40ed8bc5da0d6bc679c271",
+                "reference": "a59aa7f5f2fd79352f40ed8bc5da0d6bc679c271",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 "source": "https://github.com/pbergman/KeePass/tree/master",
                 "issues": "https://github.com/pbergman/KeePass/issues"
             },
-            "time": "2014-02-23 15:11:27"
+            "time": "2014-02-25 20:30:48"
         },
         {
             "name": "pbergman/sharedmemory",
@@ -48,12 +48,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pbergman/SHMController.git",
-                "reference": "3239d40e1f1df997e7cb5dab23ae018d76558b45"
+                "reference": "87f68756d6c2d62bd3fb43e55115641c9d28f16c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pbergman/SHMController/zipball/3239d40e1f1df997e7cb5dab23ae018d76558b45",
-                "reference": "3239d40e1f1df997e7cb5dab23ae018d76558b45",
+                "url": "https://api.github.com/repos/pbergman/SHMController/zipball/87f68756d6c2d62bd3fb43e55115641c9d28f16c",
+                "reference": "87f68756d6c2d62bd3fb43e55115641c9d28f16c",
                 "shasum": ""
             },
             "require": {
@@ -79,7 +79,7 @@
                 "source": "https://github.com/pbergman/SHMController/tree/master",
                 "issues": "https://github.com/pbergman/SHMController/issues"
             },
-            "time": "2014-02-20 13:03:53"
+            "time": "2014-02-26 08:45:09"
         },
         {
             "name": "symfony/config",
