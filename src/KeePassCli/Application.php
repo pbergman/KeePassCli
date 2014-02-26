@@ -46,8 +46,8 @@ class Application extends BaseApplication
     public function doRun(InputInterface $input, OutputInterface $output)
     {
         if (true === $input->hasParameterOption(array('--reset-pwd', '-R'))) {
-            $shm = new \SharedMemory\Controller();
-            $shm->varDel('71528FF615139991960748DC');
+            $shm = new SHMHelper();
+            $shm->remove();
             return 0;
         }
 

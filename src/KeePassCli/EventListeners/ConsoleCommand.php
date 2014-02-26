@@ -7,7 +7,7 @@
 namespace KeePassCli\EventListeners;
 
 use \KeePass\Application;
-use \SharedMemory\Controller;
+use \KeePassCli\SHMHelper;
 use \Symfony\Component\Console\Event\ConsoleCommandEvent;
 use \Symfony\Component\Console\Helper\DialogHelper;
 use \Symfony\Component\Console\Output\OutputInterface;
@@ -28,15 +28,15 @@ class ConsoleCommand implements EventListenerInterface
 
         if ($refCommand->isSubclassOf('\KeePassCli\Commands\ApplicationInterface')) {
 
-            $shm     = new Controller();
+            $shm     = new SHMHelper();
             $keePass = new Application(
                 function() use ($shm, $dialog, $output){
 
-                    if ( false === $pwd = $shm->varGet('71528FF615139991960748DC')) {
+                    if (false === $pwd = $shm->get()) {
 
                         $pwd = $dialog->askHiddenResponse($output, 'KeePass database password: ', true);
 
-                        $shm->varSet('71528FF615139991960748DC', $pwd);
+                        $shm->save($pwd);
                     }
 
                     return $pwd;
