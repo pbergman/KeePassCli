@@ -5,7 +5,7 @@
  * @copyright Philip Bergman
  */
 
-require_once 'vendor/autoload.php';
+require_once dirname(__FILE__).'/vendor/autoload.php';
 
-$app = new KeePassCli\Application();
+$app = new \KeePassCli\Application();
 $app->run();
