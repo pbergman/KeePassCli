@@ -70,7 +70,11 @@ class EntriesSearch extends Command implements ApplicationInterface
         }
 
         if (!empty($field)) {
-            $results = $entities->where($field, $search, 'like', $ci)->getResult();
+            try{
+                $results = $entities->where($field, $search, 'like', $ci)->getResult();
+            } catch (\Exception $e) {
+                $results = $entities->whereInData($field, $search, 'like', $ci)->getResult();
+            }
         } else {
             $results = $entities->search($search, $ci)->getResult();
         }
@@ -84,7 +88,7 @@ class EntriesSearch extends Command implements ApplicationInterface
             }
         }
 
-        $output->writeln(sprintf("\nFound <comment>%s</comment> records\n",count($results)));
+        $output->writeln(sprintf("\nFound <comment>%s</comment> records for <comment>%s</comment>\n", count($results), $search));
 
 
     }
