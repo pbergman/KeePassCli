@@ -28,7 +28,7 @@ class EntityTableHelper extends TableHelper
         return 'entity_table';
     }
 
-    public function addEntity($entity)
+    public function addEntity($entity, $minimize = false)
     {
         $entityRef  = new \ReflectionClass($entity);
         $entityType = strtolower($entityRef->getShortName());
@@ -49,11 +49,15 @@ class EntityTableHelper extends TableHelper
                             break;
                         case 'last_modified':
                         case 'created':
-                            /** @var \DateTime $propertyValue */
-                            $rows[] = array($property->name, $propertyValue->format('Y-m-d H:i:s'));
+                            if ( $minimize == false) {
+                                /** @var \DateTime $propertyValue */
+                                $rows[] = array($property->name, $propertyValue->format('Y-m-d H:i:s'));
+                            }
                             break;
                         default:
-                            $rows[] = array($property->name, $propertyValue);
+                            if ( $minimize == false) {
+                                $rows[] = array($property->name, $propertyValue);
+                            }
                     }
 
                 }
