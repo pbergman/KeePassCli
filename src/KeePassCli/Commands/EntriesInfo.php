@@ -14,8 +14,6 @@ use \Symfony\Component\Console\Helper\DialogHelper;
 use \Symfony\Component\Console\Input\InputInterface;
 use \Symfony\Component\Console\Output\OutputInterface;
 
-use \PBergman\WhipTail\Controller as ShellDialog;
-
 
 class EntriesInfo extends Command implements ApplicationInterface
 {
