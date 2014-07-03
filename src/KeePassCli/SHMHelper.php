@@ -7,7 +7,7 @@
 
 namespace KeePassCli;
 
-use SharedMemory\IOController;
+use PBergman\SharedMemory\IOController;
 
 /**
  * Class SHMHelper

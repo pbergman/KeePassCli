@@ -6,12 +6,12 @@
 
 namespace KeePassCli;
 
-use \KeePass\Entity\BaseEntity;
-use \KeePass\EntityController\Controller as EntityController;
-use \KeePass\EntityController\Filters\Filter as ecFilter;
+use Pbergman\KeePass\Entity\BaseEntity;
+use Pbergman\KeePass\EntityController\Controller as EntityController;
+use Pbergman\KeePass\EntityController\Filters\Filter as ecFilter;
 
-use \KeePass\Exceptions\EntityUnknownPropertyException;
-use \KeePass\Exceptions\OptionNotAllowedException;
+use Pbergman\KeePass\Exceptions\EntityUnknownPropertyException;
+use Pbergman\KeePass\Exceptions\OptionNotAllowedException;
 
 /**
  * Class EntityListBuilder
@@ -63,7 +63,7 @@ class EntityListBuilder
      *
      * @param   string|array $name
      * @return  array
-     * @throws \KeePass\Exceptions\EntityUnknownPropertyException
+     * @throws \Pbergman\KeePass\Exceptions\EntityUnknownPropertyException
      */
     public function build($name)
     {

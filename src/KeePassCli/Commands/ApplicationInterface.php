@@ -8,6 +8,6 @@ namespace KeePassCli\Commands;
 
 interface ApplicationInterface
 {
-    public function setKeePassApplication(\KeePass\Application $application);
+    public function setKeePassApplication(\PBergman\KeePass\Application $application);
 
 }

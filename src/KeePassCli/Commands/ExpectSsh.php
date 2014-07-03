@@ -6,7 +6,7 @@
 
 namespace KeePassCli\Commands;
 
-use KeePass\Entity\Entry;
+use PBergman\KeePass\Entity\Entry;
 use \KeePassCli\EntityListBuilder;
 use \KeePassCli\Helper\EntityTableHelper;
 use \Symfony\Component\Console\Command\Command;
@@ -15,15 +15,15 @@ use \Symfony\Component\Console\Input\InputInterface;
 use \Symfony\Component\Console\Output\OutputInterface;
 
 
-class ServerSsh extends Command implements ApplicationInterface, ValidateInterface
+class ExpectSsh extends Command implements ApplicationInterface, ValidateInterface
 {
-    /** @var \KeePass\Application  */
+    /** @var \PBergman\KeePass\Application  */
     protected $application;
 
     /**
-     * @param \KeePass\Application $application
+     * @param \PBergman\KeePass\Application $application
      */
-    public function setKeePassApplication(\KeePass\Application $application)
+    public function setKeePassApplication(\PBergman\KeePass\Application $application)
     {
         $this->application = $application;
     }
@@ -41,7 +41,7 @@ class ServerSsh extends Command implements ApplicationInterface, ValidateInterfa
     protected function configure()
     {
         $this
-            ->setName('server:ssh')
+            ->setName('expect:ssh')
             ->setDescription('Will initialize ssh');
     }
 
@@ -52,7 +52,7 @@ class ServerSsh extends Command implements ApplicationInterface, ValidateInterfa
         $dialog         = $this->getHelperSet()->get('dialog');
         /** @var EntityTableHelper $entityTable */
         $entityTable    = $this->getHelperSet()->get('entity_table');
-        /** @var \KeePass\EntityController\Controller $ec */
+        /** @var \PBergman\KeePass\EntityController\Controller $ec */
         $ec             = $this->application->get('keepass')->getEntityController();
         $ac             = new EntityListBuilder($ec, 'entry');
         $index          = $ac->build(array('name','namespace'));

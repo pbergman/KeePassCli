@@ -13,13 +13,13 @@ use \Symfony\Component\Console\Output\OutputInterface;
 class CacheClear extends Command implements ApplicationInterface
 {
 
-    /** @var \KeePass\Application  */
+    /** @var \PBergman\KeePass\Application  */
     protected $application;
 
     /**
-     * @param \KeePass\Application $application
+     * @param \PBergman\KeePass\Application $application
      */
-    public function setKeePassApplication(\KeePass\Application $application)
+    public function setKeePassApplication(\PBergman\KeePass\Application $application)
     {
         $this->application = $application;
     }

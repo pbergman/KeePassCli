@@ -15,13 +15,13 @@ use \Symfony\Component\Console\Output\OutputInterface;
 
 class GroupGetEntries extends Command implements ApplicationInterface
 {
-    /** @var \KeePass\Application  */
+    /** @var \PBergman\KeePass\Application  */
     protected $application;
 
     /**
-     * @param \KeePass\Application $application
+     * @param \PBergman\KeePass\Application $application
      */
-    public function setKeePassApplication(\KeePass\Application $application)
+    public function setKeePassApplication(\PBergman\KeePass\Application $application)
     {
         $this->application = $application;
     }
@@ -40,7 +40,7 @@ class GroupGetEntries extends Command implements ApplicationInterface
         $dialog         = $this->getHelperSet()->get('dialog');
         /** @var EntityTableHelper $entityTable */
         $entityTable    = $this->getHelperSet()->get('entity_table');
-        /** @var \KeePass\EntityController\Controller $ec */
+        /** @var \PBergman\KeePass\EntityController\Controller $ec */
         $ec             = $this->application->get('keepass')->getEntityController();
         $ac             = new EntityListBuilder($ec, 'group');
         $index          = $ac->build(array('name','namespace'));
