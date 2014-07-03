@@ -6,7 +6,7 @@
 
 namespace KeePassCli\EventListeners;
 
-use \KeePass\Application;
+use \PBergman\KeePass\Application;
 use \KeePassCli\SHMHelper;
 use \Symfony\Component\Console\Event\ConsoleCommandEvent;
 use \Symfony\Component\Console\Helper\DialogHelper;
