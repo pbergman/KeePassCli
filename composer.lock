@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pbergman/KeePass.git",
-                "reference": "8ad7d0ce7867d0e64808cafbc84e193a7e0e9eb2"
+                "reference": "22ef989e560dc8e559cb76d7ab4390c733f90e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pbergman/KeePass/zipball/8ad7d0ce7867d0e64808cafbc84e193a7e0e9eb2",
-                "reference": "8ad7d0ce7867d0e64808cafbc84e193a7e0e9eb2",
+                "url": "https://api.github.com/repos/pbergman/KeePass/zipball/22ef989e560dc8e559cb76d7ab4390c733f90e11",
+                "reference": "22ef989e560dc8e559cb76d7ab4390c733f90e11",
                 "shasum": ""
             },
             "require": {
@@ -41,7 +41,7 @@
                 "source": "https://github.com/pbergman/KeePass/tree/master",
                 "issues": "https://github.com/pbergman/KeePass/issues"
             },
-            "time": "2014-04-08 11:24:21"
+            "time": "2014-10-06 07:47:18"
         },
         {
             "name": "pbergman/sharedmemory",
@@ -459,6 +459,7 @@
         "symfony/console": 0,
         "symfony/event-dispatcher": 0
     },
+    "prefer-stable": false,
     "platform": [],
     "platform-dev": []
 }
